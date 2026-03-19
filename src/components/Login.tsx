@@ -1,119 +1,205 @@
 import { useState, type ChangeEvent } from "react";
+
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { login } from "../services/authService";
+import loginBg from "../assets/images/login-bg.webp";
+import logo from "../assets/images/logo.png";
 
 function Login() {
+
   const navigate = useNavigate();
 
-  const [form,setForm]=useState({
-   userName:"",
-   passWord:""
+  const [form, setForm] = useState({
+    userName: "",
+    passWord: ""
   });
 
-  const [errors,setErrors]=useState({
-   userName:"",
-   passWord:""
+  const [errors, setErrors] = useState({
+    userName: "",
+    passWord: ""
   });
 
-const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
-     const {name,value}=e.target;
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-     setForm(prev=>({
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setForm(prev => ({
       ...prev,
-      [name]:value,
-     }));
-   }
+      [name]: value
+    }));
+  };
 
-   const validateForm=()=>{
-    let valid=true;
-    const newErrors = { userName: "", passWord: "" };
+  const validateForm = () => {
+
+    let valid = true;
+
+    const newErrors = {
+      userName: "",
+      passWord: ""
+    };
 
     if (!form.userName.trim()) {
-      newErrors.userName = "Username is required";
+      newErrors.userName = "Username required";
       valid = false;
     }
 
     if (!form.passWord.trim()) {
-      newErrors.passWord = "Password is required";
+      newErrors.passWord = "Password required";
       valid = false;
     }
 
     setErrors(newErrors);
-    return valid;
-   };
 
-   const handleSubmit=async (e:React.FormEvent)=>{
+    return valid;
+
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+
     e.preventDefault();
-    if(!validateForm()) return;
-     console.log("Login Data:", form);
-    const body={
-     "userName":form.userName,
-     "password":form.passWord
-    }
-    const response=await login(body);
-    console.log('res',response);
-    navigate('/dashboard');
-    if(response.success){
-    console.log(response.success);
-    //  navigate('/dashboard');
-    }else{
+
+    if (!validateForm()) return;
+
+    setLoading(true);
+
+    const body = {
+      userName: form.userName,
+      password: form.passWord
+    };
+
+    const response = await login(body);
+
+    setLoading(false);
+
+    if (response.success === true) {
+
+      localStorage.setItem("username", form.userName);
+
+      navigate("/dashboard", { replace: true });
+
+    } else {
       alert(response.message);
     }
-   
-   }
- return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white w-96 p-8 rounded-xl shadow-lg"
-      >
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Smart PG
-        </h2>
 
-        {/* Username */}
-        <div className="mb-4">
+  };
+
+  return (
+
+    <div className="login-container">
+
+      {/* LEFT SIDE */}
+
+      <div
+        className="login-left"
+        style={{ backgroundImage: `url(${loginBg})` }}
+      >
+
+        <div className="overlay">
+
+          <h1>Smart PG</h1>
+
+          <p>
+            Manage rooms, tenants and payments
+            with one powerful dashboard.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      {/* RIGHT SIDE */}
+
+      <div className="login-right">
+
+        {/* TOP LOGO */}
+
+        <div className="top-logo">
+
+          <img
+            src={logo}
+            alt="Smart PG"
+            className="logo-img"
+          />
+
+        </div>
+
+
+        {/* LOGIN FORM */}
+
+        <form
+          onSubmit={handleSubmit}
+          className="login-card"
+        >
+
+          <div className="login-header">
+
+            <h2>Smart PG</h2>
+
+            <p className="login-subtitle">
+              PG Management System
+            </p>
+
+          </div>
+
           <input
             name="userName"
             value={form.userName}
             onChange={handleChange}
             placeholder="Username"
-            className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
           />
-          {errors.userName && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.userName}
-            </p>
-          )}
-        </div>
 
-        {/* Password */}
-        <div className="mb-6">
-          <input
-            type="passWord"
-            name="passWord"
-            value={form.passWord}
-            onChange={handleChange}
-            placeholder="Password"
-            className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-          {errors.passWord && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.passWord}
-            </p>
-          )}
-        </div>
+          {errors.userName &&
+            <p className="error">{errors.userName}</p>
+          }
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-        >
-          Login
-        </button>
-      </form>
+
+          {/* PASSWORD FIELD */}
+
+          <div className="password-field">
+
+            <input
+              type={showPassword ? "text" : "password"}
+              name="passWord"
+              value={form.passWord}
+              onChange={handleChange}
+              placeholder="Password"
+            />
+
+            <span
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🙈" : "👁"}
+            </span>
+
+          </div>
+
+          {errors.passWord &&
+            <p className="error">{errors.passWord}</p>
+          }
+
+
+          <button
+            type="submit"
+            disabled={loading}
+          >
+
+            {loading ? "Logging in..." : "Login"}
+
+          </button>
+
+        </form>
+
+      </div>
+
     </div>
+
   );
+
 }
 
 export default Login;

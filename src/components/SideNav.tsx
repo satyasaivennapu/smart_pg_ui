@@ -5,8 +5,8 @@ type Props = {
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
-function SideNav({ sidebarOpen ,setSidebarOpen}: Props) {
+import logo from "../assets/images/logo.png";
+function SideNav({ sidebarOpen, setSidebarOpen }: Props) {
 
   const navigate = useNavigate();
   const [mastersOpen, setMastersOpen] = useState(false);
@@ -14,15 +14,15 @@ function SideNav({ sidebarOpen ,setSidebarOpen}: Props) {
   // const [sidebarsOpen, setSidebarOpen] = useState(true);
   const isMobile = window.innerWidth <= 768;
   const handleMenuClick = (menuName: string) => {
-  console.log("menu name", menuName);
-  setMastersOpen(false);
-  setReportsOpen(false);
+    console.log("menu name", menuName);
+    setMastersOpen(false);
+    setReportsOpen(false);
 
-  // ✅ Auto close sidebar only on mobile
-  if (isMobile) {
-    setSidebarOpen(false);
-  }
-};
+    // ✅ Auto close sidebar only on mobile
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  };
 
   const handleMastersClick = () => {
     const isOpenMasters = !mastersOpen;
@@ -44,6 +44,12 @@ function SideNav({ sidebarOpen ,setSidebarOpen}: Props) {
   return (
     <div className={`sidenav ${sidebarOpen ? "open" : "closed"}`}>
       <h2 className="logo" onClick={() => isMobile && setSidebarOpen(false)}>Smart PG</h2>
+      {/* <img
+        src={logo}
+        alt="Smart PG"
+        className="logo"
+        onClick={() => isMobile && setSidebarOpen(false)}
+      /> */}
 
       <NavLink to="/dashboard" className="nav-link" onClick={() => { handleMenuClick('Dashboard') }}>
         Dashboard
