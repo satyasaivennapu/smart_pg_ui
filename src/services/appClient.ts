@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.BACK_END_API_URL || "http://localhost:3000/api";
+const BASE_URL = import.meta.env.BACK_END_API_URL || "https://consecratory-flossie-rigidly.ngrok-free.dev/api";
 
 export const appClient=async(
     url:string,

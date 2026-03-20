@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:3000/api"; // change to your backend
+const API_BASE = "https://consecratory-flossie-rigidly.ngrok-free.dev/api"; // change to your backend
 
 export const login = async (data:any) => {
 
