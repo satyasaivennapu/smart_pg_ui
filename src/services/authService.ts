@@ -23,3 +23,15 @@ export const login = async (data:any) => {
   }
 
 };
+
+export const submitCheckin = async (data: any) => {
+  try {
+    const response = await axios.post(`${API_BASE}/checkin`, data);
+    return response.data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response?.data?.message || "Checkin failed"
+    };
+  }
+};

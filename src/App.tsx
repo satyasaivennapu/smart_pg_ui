@@ -27,7 +27,7 @@ import Users from './components/Users';
 import Rooms from './components/Rooms';
 import RoomTypes from './components/RoomTypes';
 
-// Reports
+import ReportsLayout from './components/ReportsLayout';
 import CheckinReport from './components/CheckinReport';
 import CheckOutReport from './components/CheckOutReport';
 import TransactionReport from './components/TransactionReport';
@@ -134,8 +134,11 @@ function App() {
           <Route path="/masters/room-types" element={<RoomTypes />} />
 
           {/* Reports */}
-          <Route path="/reports/checkin" element={<CheckinReport />} />
-          <Route path="/reports/checkout" element={<CheckOutReport />} />
+          <Route path="/reports" element={<ReportsLayout />}>
+            <Route index element={<Navigate to="checkin" replace />} />
+            <Route path="checkin" element={<CheckinReport />} />
+            <Route path="checkout" element={<CheckOutReport />} />
+          </Route>
           <Route path="/reports/transactions" element={<TransactionReport />} />
           <Route path="/reports/expenses" element={<ExpensesReport />} />
           <Route path="/reports/income" element={<IncomeReports />} />

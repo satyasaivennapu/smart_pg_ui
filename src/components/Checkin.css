@@ -1,49 +1,200 @@
-.checkin-container {
-  max-width: 600px;
-  background: white;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+/* CSS specifically for the Checkin component */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.checkin-wrapper {
+  font-family: 'Inter', sans-serif;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #f6f8fb;
+  min-height: 100vh;
+  transition: max-width 0.3s ease;
 }
 
+.checkin-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 30px;
+}
+
+/* Base mobile-first layout styling */
 .checkin-form {
-  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 16px;
+  column-gap: 16px;
 }
 
-.form-row {
+.input-group,
+.upload-section,
+.submit-btn-full {
+  grid-column: span 2;
+}
+
+.mobile-half {
+  grid-column: span 1;
+}
+
+.input-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 12px;
 }
 
-.form-row label {
+.input-group label {
   font-size: 13px;
-  margin-bottom: 4px;
-  color: #334155;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
 }
 
-.form-row input {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #cbd5e1;
+.input-group input,
+.input-group select {
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.checkbox-row {
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input-group input::placeholder,
+.input-group select:invalid {
+  color: #9ca3af;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+
+.refund-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 12px 0;
+  gap: 12px;
 }
 
-.submit-btn {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
+.refund-input {
+  flex: 1;
+}
+
+.refund-checkbox {
+  width: 24px !important;
+  height: 24px !important;
+  accent-color: #f87171;
   cursor: pointer;
 }
 
-.submit-btn:hover {
-  background: #1d4ed8;
+.sub-total-box {
+  padding: 14px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #111827;
+  font-size: 15px;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.upload-section label {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.upload-box {
+  position: relative;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 30px 10px;
+  text-align: center;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.upload-box:hover {
+  border-color: #94a3b8;
+  background-color: #ffffff;
+}
+
+.upload-label {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.submit-btn-full {
+  margin-top: 20px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.submit-btn-full:hover {
+  background-color: #1d4ed8;
+}
+
+/* Desktop layout styling */
+@media (min-width: 768px) {
+  .checkin-wrapper {
+    max-width: 800px;
+  }
+  
+  .checkin-form {
+    column-gap: 24px;
+  }
+
+  .input-group,
+  .mobile-half {
+    grid-column: span 1;
+  }
+
+  /* File uploads and submit button still span both columns */
+  .upload-section,
+  .submit-btn-full {
+    grid-column: span 2;
+  }
 }
