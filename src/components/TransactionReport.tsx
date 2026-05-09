@@ -1,7 +1,7 @@
-import { useState, FC } from 'react';
+import { useState, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../components/Reports.css';
-import TransactionTable from './TransactionTable';
+// import TransactionTable from './TransactionTable';
 
 const TransactionReport: FC = () => {
   const navigate = useNavigate();

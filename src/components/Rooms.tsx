@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { processTenant, processBranch, createBranchRooms } from '../services/authService';
+import { processBranch, createBranchRooms } from '../services/authService';
 import './Rooms.css';
 
 interface Room {
@@ -16,13 +16,11 @@ interface Floor {
   rooms: Room[];
 }
 
-interface Tenant { id: number; name: string; }
-interface Branch { id: number; name: string; tenantId: number; }
 
 export default function Rooms() {
   const [selectedTenant, setSelectedTenant] = useState<number>(0);
   const [selectedBranch, setSelectedBranch] = useState<number>(0);
-  const [bedAvailability, setBedAvailability] = useState<number>(1);
+  const [bedAvailability] = useState<number>(1);
   const [loading, setLoading] = useState(false);
   const userId = 101; 
   

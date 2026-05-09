@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, type FC, type ChangeEvent, type FormEvent } from 'react';
 import { manageExpenses } from '../services/authService';
 import './Expenses.css';
 

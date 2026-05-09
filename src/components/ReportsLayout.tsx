@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { Outlet, useNavigate, NavLink, useLocation } from 'react-router-dom';
 import './Reports.css';
 

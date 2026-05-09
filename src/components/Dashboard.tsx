@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, type FC } from 'react';
 import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip as RechartsTooltip,
   BarChart, Bar, XAxis, YAxis, CartesianGrid
@@ -49,7 +49,7 @@ const Dashboard: FC = () => {
   if (loading) return <div className="loading-state">Loading amazing dashboard...</div>;
   if (!data) return <div className="error-state">Failed to load dashboard.</div>;
 
-  const { rooms, roomsInfo, finance, roomBasedSummary } = data;
+  const { roomsInfo, finance, roomBasedSummary } = data;
   const totals = roomsInfo?.[0] || {};
 
   // Financial Data for Bar Chart
@@ -67,7 +67,7 @@ const Dashboard: FC = () => {
   ].filter(item => item.value > 0);
 
   // Get unique floors for dropdown
-  const floors = Array.from(new Set((roomBasedSummary || []).map((r: any) => r.floor_no))).sort((a: any, b: any) => a - b);
+  const floors = Array.from(new Set((roomBasedSummary || []).map((r: any) => r.floor_no))).sort((a: any, b: any) => a - b) as number[];
 
   // Filter rooms from roomBasedSummary
   const filteredRooms = (roomBasedSummary || []).filter((r: any) =>

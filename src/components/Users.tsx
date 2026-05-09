@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import { processUser, processTenant, processBranch, getUserRoles } from '../services/authService';
 import './Users.css';
 

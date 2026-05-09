@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, FormEvent } from 'react';
+import { useState, useEffect, type FC, type FormEvent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getCheckinReport, processCheckOut } from '../services/authService';
 import './CheckOuts.css';

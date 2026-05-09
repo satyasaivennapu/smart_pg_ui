@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, type FC } from 'react';
 import TransactionTable from './TransactionTable';
 import { getCheckoutReport } from '../services/authService';
 

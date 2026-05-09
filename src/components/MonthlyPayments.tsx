@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, FormEvent } from 'react';
+import { useState, useEffect, type FC, type FormEvent } from 'react';
 import { getCheckinReport, addMonthlyPayment } from '../services/authService';
 import './MonthlyPayments.css';
 
