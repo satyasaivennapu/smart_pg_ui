@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip as RechartsTooltip,
   BarChart, Bar, XAxis, YAxis, CartesianGrid
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { getDashboard, getCheckinReport, addMonthlyPayment } from '../services/authService';
 import './Dashboard.css';
 
-const Dashboard: React.FC = () => {
+const Dashboard: FC = () => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [selectedFloor, setSelectedFloor] = useState<string>('All');

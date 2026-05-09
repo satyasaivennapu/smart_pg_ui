@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { processUser, processTenant, processBranch, getUserRoles } from '../services/authService';
 import './Users.css';
 
@@ -110,7 +110,7 @@ export default function Users() {
     setIsViewOnly(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     if (isViewOnly) return;
     const { name, value, type } = e.target;
     if (type === 'checkbox') {
@@ -121,7 +121,7 @@ export default function Users() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (isViewOnly) return;
 

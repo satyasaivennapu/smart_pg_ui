@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import TransactionTable from './TransactionTable';
 import { getCheckinReport } from '../services/authService';
 
 
 
-const CheckinReport: React.FC = () => {
+const CheckinReport: FC = () => {
   const getToday = () => new Date().toISOString().split('T')[0];
   const getFirstDayOfMonth = () => {
     const d = new Date();

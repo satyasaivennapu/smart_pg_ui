@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../components/Reports.css';
 import TransactionTable from './TransactionTable';
 
-const TransactionReport: React.FC = () => {
+const TransactionReport: FC = () => {
   const navigate = useNavigate();
 
   // Date filters internal to this page

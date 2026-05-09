@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC, ChangeEvent, FormEvent } from 'react';
 import { manageExpenses } from '../services/authService';
 import './Expenses.css';
 
-const Expenses: React.FC = () => {
+const Expenses: FC = () => {
   const [expenses, setExpenses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,12 +59,12 @@ const Expenses: React.FC = () => {
     setCurrentExpense(null);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const action = currentExpense ? 'UPDATE' : 'ADD';
     const payload = {

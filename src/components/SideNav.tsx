@@ -5,7 +5,7 @@ type Props = {
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-import logo from "../assets/images/logo.png";
+// import logo from "../assets/images/logo.png";
 function SideNav({ sidebarOpen, setSidebarOpen }: Props) {
 
   const navigate = useNavigate();
