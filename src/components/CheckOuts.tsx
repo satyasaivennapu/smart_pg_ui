@@ -2,7 +2,6 @@ import { useState, useEffect, type FC, type FormEvent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getCheckinReport, processCheckOut } from '../services/authService';
 import './CheckOuts.css';
-
 const CheckOuts: FC = () => {
   const [nameSearch, setNameSearch] = useState('');
   const [roomNoSearch, setRoomNoSearch] = useState('');
