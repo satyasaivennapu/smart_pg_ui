@@ -1,47 +1,112 @@
-import React from 'react';
-import { useOutletContext } from 'react-router-dom';
-import type { ReportsOutletContext } from './ReportsLayout';
-import TransactionTable, { type Transaction } from './TransactionTable';
+import { useState, useEffect, FC } from 'react';
+import TransactionTable from './TransactionTable';
+import { getCheckoutReport } from '../services/authService';
 
-// Mock Data representing CheckOuts
-export const checkOutTransactions: Transaction[] = [
-  {
-    id: 'SPGB130032600025',
-    name: 'rahul',
-    depositAmt: 10000,
-    refundAmt: 9000,
-    checkInDate: '2026-01-10',
-    checkOutDate: '2026-03-10',
-    room: '101 (2)',
-    floor: '1',
-    totalAmt: 11000
-  },
-  {
-    id: 'SPGB140032600042',
-    name: 'arjun',
-    depositAmt: 5000,
-    refundAmt: 4500,
-    checkInDate: '2025-11-05',
-    checkOutDate: '2026-03-05',
-    room: '405 (1)',
-    floor: '4',
-    totalAmt: 5500
-  }
-];
 
-const CheckOutReport: React.FC = () => {
-  const { fromDate, toDate } = useOutletContext<ReportsOutletContext>();
 
-  // In a real application, you might use fromDate and toDate to filter.
-  const filteredData = checkOutTransactions.filter(txn => {
-    // Example: checking if checkout date falls within range
-    if (!fromDate || !toDate) return true;
-    return txn.checkOutDate >= fromDate && txn.checkOutDate <= toDate;
-  });
+const CheckOutReport: FC = () => {
+  const getToday = () => new Date().toISOString().split('T')[0];
+  const getFirstDayOfMonth = () => {
+    const d = new Date();
+    d.setDate(1);
+    return d.toISOString().split('T')[0];
+  };
+
+  const [fromDate, setFromDate] = useState<string>(getFirstDayOfMonth());
+  const [toDate, setToDate] = useState<string>(getToday());
+  const [name, setName] = useState<string>('');
+  const [roomNo, setRoomNo] = useState<string>('');
+  const [reportData, setReportData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchReport();
+  }, []);
+
+  const fetchReport = async () => {
+    const savedUser = localStorage.getItem('user');
+    if (!savedUser) return;
+
+    const user = JSON.parse(savedUser);
+    setLoading(true);
+
+    const res = await getCheckoutReport({
+      tenantId: user.tenant_id,
+      branchId: user.branch_id,
+      fromDate,
+      toDate,
+      name,
+      roomNo
+    });
+
+    if (res?.success) {
+      const mappedData = (res.result || []).map((item: any) => ({
+        id: item.invoice_number || item.booking_unique_id || 'N/A',
+        bookingUniqueId: item.booking_unique_id || 'N/A',
+        name: item.name || item.occupant_name || 'N/A',
+        checkInDate: item.checkInDate || item.check_in_date || 'N/A',
+        checkOutDate: item.checkOutDate || item.check_out_date || 'N/A',
+        room: item.room || item.room_no || 'N/A',
+        floor: item.floor || item.floor_no || 'N/A',
+        depositAmt: Number(item.depositAmt || item.deposit_amount || 0),
+        refundAmt: Number(item.refundAmt || item.refund_amount || 0),
+         rentAmt: Number(item.rent_amount || item.rent_amount || 0),
+         bedNo: Number(item.bed_no || item.bed_no || 0),
+        totalAmt: Number(item.totalAmt || item.total_amount || item.monthly_amount || 0)
+      }));
+      setReportData(mappedData);
+    }
+    setLoading(false);
+  };
+
+  const handleClear = () => {
+    const today = getToday();
+    setFromDate(today);
+    setToDate(today);
+    setName('');
+    setRoomNo('');
+  };
 
   return (
     <div className="report-list">
-      <TransactionTable data={filteredData} />
+      <div className="filter-row">
+        <div className="filter-item">
+          <label>From Date</label>
+          <div className="filter-input-wrapper">
+             <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} onClick={(e) => (e.target as any).showPicker?.()} />
+          </div>
+        </div>
+
+        <div className="filter-item">
+          <label>To Date</label>
+          <div className="filter-input-wrapper">
+             <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} onClick={(e) => (e.target as any).showPicker?.()} />
+          </div>
+        </div>
+
+        <div className="filter-item">
+          <label>Search Name</label>
+          <div className="filter-input-wrapper">
+             <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+        </div>
+
+        <div className="filter-item">
+          <label>Room No</label>
+          <div className="filter-input-wrapper">
+             <input type="text" placeholder="Room" value={roomNo} onChange={(e) => setRoomNo(e.target.value)} />
+          </div>
+        </div>
+
+        <button className="search-btn-compact" onClick={fetchReport} disabled={loading}>
+          {loading ? '...' : 'Search'}
+        </button>
+        <button className="clear-btn-compact" onClick={handleClear} disabled={loading}>
+          Clear
+        </button>
+      </div>
+
+      {loading ? <p style={{textAlign:'center', padding:'20px'}}>Loading...</p> : <TransactionTable data={reportData} />}
     </div>
   );
 };

@@ -319,3 +319,105 @@
   color: #333;
   font-size: 0.95rem;
 }
+/* Unified Filter Row */
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    background: #fff;
+    padding: 0.75rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.filter-item {
+    flex: 1;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filter-item label {
+    font-size: 0.7rem;
+    color: #888;
+    margin-left: 0.5rem;
+    font-weight: 500;
+}
+
+.filter-input-wrapper {
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    padding: 0.4rem 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.filter-input-wrapper input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    font-size: 0.85rem;
+    outline: none;
+    color: #333;
+}
+
+.search-btn-compact {
+    background-color: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.6rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-end;
+    margin-bottom: 2px; /* align with inputs */
+}
+
+.search-btn-compact:hover {
+    background-color: #000;
+    transform: translateY(-1px);
+}
+
+.clear-btn-compact {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-end;
+    margin-bottom: 2px;
+}
+
+.clear-btn-compact:hover {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+    color: #333;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-item {
+        width: 100%;
+    }
+    .search-btn-compact, .clear-btn-compact {
+        align-self: center;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}
+
+

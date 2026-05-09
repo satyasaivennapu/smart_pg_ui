@@ -77,6 +77,7 @@ function Login() {
     if (response.success === true) {
 
       localStorage.setItem("username", form.userName);
+      localStorage.setItem("user", JSON.stringify(response.result));
 
       navigate("/dashboard", { replace: true });
 

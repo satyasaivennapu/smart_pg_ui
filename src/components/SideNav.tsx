@@ -71,6 +71,10 @@ function SideNav({ sidebarOpen, setSidebarOpen }: Props) {
         Income
       </NavLink>
 
+      <NavLink to="/monthly-payments" className="nav-link" onClick={() => { handleMenuClick('Monthly Payments') }}>
+        Monthly Payments
+      </NavLink>
+
       <NavLink to="/expenses" className="nav-link" onClick={() => { handleMenuClick('Expenses') }}>
         Expenses
       </NavLink>

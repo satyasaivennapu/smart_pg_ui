@@ -6,11 +6,14 @@ export interface Transaction {
   name: string;
   depositAmt: number;
   refundAmt: number;
+  rentAmt:number;
   checkInDate: string;
   checkOutDate: string;
   room: string;
   floor: string;
   totalAmt: number;
+  bedNo:number;
+  bookingUniqueId:string;
 }
 
 interface Props {
@@ -34,14 +37,15 @@ const TransactionTable: React.FC<Props> = ({ data }) => {
         <table className="txn-table">
           <thead>
             <tr>
-              <th>Transaction ID</th>
+              <th>Invoice Number</th>
               <th>Name</th>
               <th>Check-In</th>
               <th>Check-Out</th>
               <th>Room (Floor)</th>
+              <th>Rent Amount</th>
               <th>Deposit</th>
               <th>Refund</th>
-              <th>Total</th>
+              {/* <th>Total</th> */}
             </tr>
           </thead>
           <tbody>
@@ -56,9 +60,10 @@ const TransactionTable: React.FC<Props> = ({ data }) => {
                 <td>{txn.checkInDate}</td>
                 <td>{txn.checkOutDate}</td>
                 <td>{txn.room} ({txn.floor})</td>
+                <td>{txn.rentAmt}</td>
                 <td>₹{txn.depositAmt}</td>
                 <td>₹{txn.refundAmt}</td>
-                <td style={{ fontWeight: '600' }}>₹{txn.totalAmt}</td>
+                {/* <td style={{ fontWeight: '600' }}>₹{txn.totalAmt}</td> */}
               </tr>
             ))}
           </tbody>
@@ -74,8 +79,12 @@ const TransactionTable: React.FC<Props> = ({ data }) => {
             </div>
             <div className="txn-modal-body">
               <div className="txn-modal-detail-row">
-                <span className="txn-modal-label">Transaction ID</span>
+                <span className="txn-modal-label">Invoice Number</span>
                 <span className="txn-modal-value">{selectedTxn.id}</span>
+              </div>
+              <div className="txn-modal-detail-row">
+                <span className="txn-modal-label">Booking Unique ID</span>
+                <span className="txn-modal-value">{selectedTxn.bookingUniqueId}</span>
               </div>
               <div className="txn-modal-detail-row">
                 <span className="txn-modal-label">Name</span>
@@ -93,6 +102,14 @@ const TransactionTable: React.FC<Props> = ({ data }) => {
                 <span className="txn-modal-label">Room (Floor)</span>
                 <span className="txn-modal-value">{selectedTxn.room} (Floor {selectedTxn.floor})</span>
               </div>
+                 <div className="txn-modal-detail-row">
+                <span className="txn-modal-label">Bed No</span>
+                <span className="txn-modal-value">{selectedTxn.bedNo}</span>
+              </div>
+              <div className="txn-modal-detail-row">
+                <span className="txn-modal-label">Rent Amount</span>
+                <span className="txn-modal-value">₹{selectedTxn.rentAmt}</span>
+              </div>
               <div className="txn-modal-detail-row">
                 <span className="txn-modal-label">Deposit Amount</span>
                 <span className="txn-modal-value">₹{selectedTxn.depositAmt}</span>
@@ -102,8 +119,8 @@ const TransactionTable: React.FC<Props> = ({ data }) => {
                 <span className="txn-modal-value">₹{selectedTxn.refundAmt}</span>
               </div>
               <div className="txn-modal-detail-row" style={{ borderBottom: 'none', paddingTop: '0.5rem', marginTop: '0.5rem', borderTop: '1px solid #eee' }}>
-                <span className="txn-modal-label" style={{ fontWeight: 'bold', color: '#333' }}>Total Amount</span>
-                <span className="txn-modal-value" style={{ fontSize: '1.2rem', color: '#1a1a1a' }}>₹{selectedTxn.totalAmt}</span>
+                <span className="txn-modal-label" style={{ fontWeight: 'bold', color: '#333' }}>Total Amount (Rent + Deposit - Refund)</span>
+                <span className="txn-modal-value" style={{ fontSize: '1.2rem', color: '#1a1a1a' }}>₹{selectedTxn.rentAmt+selectedTxn.depositAmt-selectedTxn.refundAmt}</span>
               </div>
             </div>
           </div>

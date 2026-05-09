@@ -19,6 +19,7 @@ import CheckOuts from './components/CheckOuts';
 import BookingTransactions from './components/BookingTransactions';
 import Expenses from './components/Expenses';
 import Income from './components/Income';
+import MonthlyPayments from './components/MonthlyPayments';
 
 // Masters
 import Tenants from './components/Tenants';
@@ -125,6 +126,7 @@ function App() {
           <Route path="/booking-transactions" element={<BookingTransactions />} />
           <Route path="/expenses" element={<Expenses />} />
           <Route path="/income" element={<Income />} />
+          <Route path="/monthly-payments" element={<MonthlyPayments />} />
 
           {/* Masters */}
           <Route path="/masters/tenants" element={<Tenants />} />

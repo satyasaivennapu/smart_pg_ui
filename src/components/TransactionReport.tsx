@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../components/Reports.css';
 import TransactionTable from './TransactionTable';
-import { checkInTransactions } from './CheckinReport';
-import { checkOutTransactions } from './CheckOutReport';
 
 const TransactionReport: React.FC = () => {
   const navigate = useNavigate();
@@ -20,13 +18,13 @@ const TransactionReport: React.FC = () => {
   const [toDate, setToDate] = useState<string>(getToday());
 
   // All transactions combined
-  const allTransactions = [...checkInTransactions, ...checkOutTransactions];
+  // const allTransactions = [...checkInTransactions, ...checkOutTransactions];
 
   // Filter based on dates
-  const filteredData = allTransactions.filter(txn => {
-    if (!fromDate || !toDate) return true;
-    return txn.checkInDate >= fromDate && txn.checkInDate <= toDate;
-  });
+  // const filteredData = allTransactions.filter(txn => {
+  //   if (!fromDate || !toDate) return true;
+  //   return txn.checkInDate >= fromDate && txn.checkInDate <= toDate;
+  // });
 
   return (
     <div className="reports-layout-container">
@@ -59,7 +57,7 @@ const TransactionReport: React.FC = () => {
       </div>
 
       <div className="report-list">
-        <TransactionTable data={filteredData} />
+        {/* <TransactionTable data={filteredData} /> */}
       </div>
     </div>
   );

@@ -1,0 +1,156 @@
+.monthly-payments-container {
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.mp-header {
+    margin-bottom: 2rem;
+}
+
+.mp-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 1.5rem 0;
+}
+
+.mp-search-row {
+    display: flex;
+    gap: 1rem;
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f5f9;
+}
+
+.mp-search-btn {
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.mp-table-container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f5f9;
+    overflow: hidden;
+}
+
+.mp-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mp-table th {
+    background: #f8fafc;
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+}
+
+.mp-table td {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.occ-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.occ-name {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.occ-id {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.room-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.bed-no {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.status-pill {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-pill.paid { background: #d1fae5; color: #065f46; }
+.status-pill.unpaid { background: #fee2e2; color: #991b1b; }
+
+.pay-now-btn {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pay-now-btn:hover { background: #4f46e5; }
+
+/* Modal */
+.mp-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+}
+
+.mp-modal {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    padding: 1.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.form-static-text {
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.confirm-pay-btn {
+    width: 100%;
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.confirm-pay-btn:hover { background: #059669; }
