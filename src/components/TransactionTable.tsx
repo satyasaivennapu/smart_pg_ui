@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import './Reports.css';
 
 export interface Transaction {
@@ -20,7 +20,7 @@ interface Props {
   data: Transaction[];
 }
 
-const TransactionTable: React.FC<Props> = ({ data }) => {
+const TransactionTable: FC<Props> = ({ data }) => {
   const [selectedTxn, setSelectedTxn] = useState<Transaction | null>(null);
 
   if (data.length === 0) {

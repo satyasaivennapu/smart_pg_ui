@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { processTenant } from '../services/authService';
 import './Tenants.css';
 
@@ -67,7 +67,7 @@ export default function Tenants() {
     setIsViewOnly(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (isViewOnly) return;
     const { name, value, type, checked } = e.target;
     setFormData({ 
@@ -76,7 +76,7 @@ export default function Tenants() {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (isViewOnly) return;
     const crudType = formData.id ? 'UPDATE' : 'INSERT';

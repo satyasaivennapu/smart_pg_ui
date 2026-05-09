@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC, FormEvent } from 'react';
 import { getCheckinReport, addMonthlyPayment } from '../services/authService';
 import './MonthlyPayments.css';
 
-const MonthlyPayments: React.FC = () => {
+const MonthlyPayments: FC = () => {
   const [nameSearch, setNameSearch] = useState('');
   const [roomNoSearch, setRoomNoSearch] = useState('');
   const [occupants, setOccupants] = useState<any[]>([]);
@@ -37,7 +37,7 @@ const MonthlyPayments: React.FC = () => {
     fetchOccupants();
   }, []);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e: FormEvent) => {
     e.preventDefault();
     fetchOccupants();
   };

@@ -1,11 +1,11 @@
-import React from 'react';
+import { FC } from 'react';
 import { Outlet, useNavigate, NavLink, useLocation } from 'react-router-dom';
 import './Reports.css';
 
 // We define the type for outlet context
 export type ReportsOutletContext = {};
 
-const ReportsLayout: React.FC = () => {
+const ReportsLayout: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 

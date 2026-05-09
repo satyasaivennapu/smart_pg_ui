@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../components/Reports.css';
 import TransactionTable from './TransactionTable';
 import { getTransactions } from '../services/authService';
 
-const BookingTransactions: React.FC = () => {
+const BookingTransactions: FC = () => {
   const navigate = useNavigate();
 
   const getToday = () => new Date().toISOString().split('T')[0];
